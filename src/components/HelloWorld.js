@@ -7,7 +7,7 @@ class HelloWorld extends React.Component {
     return (
       <div>
         <h1>Hello World</h1>
-        <div>
+        <div className="ui grid container">
           {this.props.hogs.map(hog => {return <Hog key={hog.name} data={hog}/>})}
         </div>
       </div>
