@@ -23,7 +23,6 @@ class PigCard extends React.Component {
       return(
           <div>
             <p>Specialty:{this.props.speciality}</p>
-            <p>Greased: {this.props.greased}</p>
             <p>Weight: {this.props.weight}</p>
             <p>Highest Medal Achieved: {this.props.hma}</p>
           </div>
@@ -31,7 +30,6 @@ class PigCard extends React.Component {
   }
 
   render() {
-      console.log(this.props)
     return (
       <div className="pigTile" onClick={this.handleClick}>
           <img src={this.imageLocation()} alt=""/>
