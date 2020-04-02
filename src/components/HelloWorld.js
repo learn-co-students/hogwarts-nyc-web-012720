@@ -1,11 +1,12 @@
+13 lines (11 sloc) 206 Bytes
 import React, { Fragment } from "react";
 
 class HelloWorld extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <h1>Hello World</h1>
-      </>
+      </div>
     );
   }
 }
