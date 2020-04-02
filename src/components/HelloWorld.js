@@ -1,4 +1,3 @@
-13 lines (11 sloc) 206 Bytes
 import React, { Fragment } from "react";
 
 class HelloWorld extends React.Component {
