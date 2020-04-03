@@ -7,7 +7,8 @@
     "babel-preset-stage-1": "^6.24.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
-    "semantic-ui-css": "^2.2.11"
+    "semantic-ui-css": "^2.2.11",
+    "xo": "^0.28.2"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
@@ -86,5 +87,19 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "xo": {
+    "envs": [
+      "browser"
+    ],
+    "prettier": true,
+    "rules": {
+      "radix": 0,
+      "capitalized-comments": 0
+    }
+  },
+  "prettier": {
+    "semi": false
   }
+
 }
