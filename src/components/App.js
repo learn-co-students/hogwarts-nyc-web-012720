@@ -2,55 +2,55 @@ import React, { Component } from "react";
 import "../App.css";
 import Nav from "./Nav";
 import hogs from "../porkers_data";
-import HelloWorld from "./HelloWorld";
+import HogCard from './HogCard'
+import Filters from "./Filters";
+
+//HogCard
+//HogDetail
+ 
 
 class App extends Component {
-
   state = {
-    greased: false
-  }
-
-  renderHogs = () => {
-    return hogs.map( (hog, index) => 
-      <HelloWorld 
-        key={index}
-        name={hog.name}
-        greased={hog.greased}
-        weight={hog.weight}
-        highest_medal={hog['highest medal achieved']}
-      />
-    )
+    hogs: hogs,
+    onlyGreased: false,
+    sort: 'unsorted'
   }
 
   toggleGreased = () => {
-    this.setState ({
-      greased: !this.state.greased
-    })
+    this.setState({ onlyGreased: !this.state.onlyGreased})
   }
 
-  renderGreased = () => {
-    const greasedHogs = hogs.filter( hog => hog.greased)
-    return greasedHogs.map( (hog, index) => {
-      // console.log(hog.greased)
-      <HelloWorld 
-        key={index}
-        name={hog.name}
-        greased={hog.greased}
-        weight={hog.weight}
-        highest_medal={hog['highest medal achieved']}
-      />
-    }
-    )
+  changeSort = event => {
+    this.setState({ sort: event.target.value})
   }
 
   render() {
-    console.log(this.renderGreased())
+    let displayedHogs = [...this.state.hogs] // made a copy of the sate, making sure we're not mutating the original
+    
+    if (this.state.onlyGreased) {
+      displayedHogs = displayedHogs.filter(hog => hog.greased)
+    } //conditionally resetting that copied array to a filtered version of it
+
+    else if (this.state.sort === 'name'){
+      displayedHogs.sort( (a,b) => a.name.localeCompare(b.name))
+    } // ^ soring the copied array in alphabetical order
+    
+     else if (this.state.sort === 'weight') {
+      displayedHogs.sort( (a, b) => a.weight - b.weight)
+    } // ^ sorting the copied array in a acending order 
+
     return (
       <div className="App">
         <Nav />
-        <button onClick={this.toggleGreased}>Greased</button>
-        {/* {this.renderGreased()} */}
-        {this.state.greased ? this.renderGreased() : this.renderHogs()}
+         <Filters 
+            greased={this.state.onlyGreased}
+            toggleGreased={this.toggleGreased} 
+            sort={this.state.sort}
+            changeSort={this.changeSort}
+          />
+            {displayedHogs.map((hog, index) => <HogCard key={index} {...hog}/>)}
+            {/* ^ this will take a single hog and give us a single HogCard.
+            the spread operator {...hog} passes ALL of the information to the child component as individual props*/}
       </div>
     );
   }
